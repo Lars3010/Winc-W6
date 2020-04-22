@@ -56,13 +56,15 @@ class Container extends React.Component{
 
     makeDentistSick = (dentistID) => {
         const dentistState = [...this.state.dentists];
-        const selectedDentist = dentistState.find(dentist => dentist.id === dentistID);
-        const sickDentist = {...selectedDentist, isSick: true};
-        const newDentistState = [...dentistState, sickDentist];
-        console.log(newDentistState);
-        // this.setState({
-        //     dentists: dentistState
-        // })
+        const newDentistState = dentistState.map(item => {
+            if(item.id === dentistID){
+                return {...item, isSick: true}
+            }
+            return item;
+        });
+        this.setState({
+            dentists: newDentistState
+        })
     }
 
     render() {   
